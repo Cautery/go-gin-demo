@@ -1,16 +1,28 @@
 package models
 
-import "errors"
+import (
+	"errors"
+	"os"
+)
 
 type Article struct {
 	ID      int    `json:"id"`
 	Title   string `json:"title"`
+	Author  string `json:"author"`
 	Content string `json:"content"`
 }
 
 var ArticleList = []Article{
-	{ID: 1, Title: "Article 1", Content: "Lorem ipsum dolor sit amet."},
-	{ID: 2, Title: "Article 2", Content: "Donec vel tempus nunc."},
+	{ID: 1, Title: "Metamorphosis", Author: "Franz Kafka", Content: readArticle("metamorphosis.txt")},
+	{ID: 2, Title: "The War of the Worlds", Author: "H. G. Wells", Content: readArticle("war-of-the-worlds.txt")},
+}
+
+func readArticle(file string) string {
+	text, err := os.ReadFile("resources/" + file)
+	if err != nil {
+		return "Unable to read file."
+	}
+	return string(text)
 }
 
 func GetAllArticles() []Article {

@@ -1,7 +1,10 @@
 {{ template "header.html" .}}
 
-<h1>{{ .payload.Title }}</h1>
+<h1><i>{{ .payload.Title }}</i></h1>
+<div style="font-size: 18px"><b>by {{ .payload.Author}}</b></div>
 
-<p>{{ .payload.Content }}</p>
+<br>
+
+<p style="text-indent: 30px">{{ .payload.Content }}</p>
 
 {{ template "footer.html" .}}
